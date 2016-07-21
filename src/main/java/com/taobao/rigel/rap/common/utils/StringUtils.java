@@ -558,4 +558,26 @@ public class StringUtils {
 
         return rv;
     }
+    
+    /**
+	 * 字符串空处理，去除首尾空格 如果str为null，返回"",否则返回str
+	 * @param str
+	 * @return
+	 */
+	public static String isNull(String str) {
+		if (str == null) {
+			return "";
+		}
+		return str.trim();
+	}
+    
+	/**
+	 * 检验是否非空字符串
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isNotBlank(String str) {
+		return !StringUtils.isNull(str).equals("");
+	}
 }

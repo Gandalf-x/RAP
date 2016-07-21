@@ -13,7 +13,19 @@ public class Parameter implements java.io.Serializable {
     private String identifierChange;
     private String remarkChange;
     private String dataType;
+    /**
+     * 长度
+     */
+    private String dataLength;
+    /**
+     * 必需性
+     */
+    private String needed;
     private String remark;
+    /**
+     * 排序
+     */
+    private String sort;
     private Set<Action> actionRequestList = new HashSet<Action>();
     private Set<Action> actionResponseList = new HashSet<Action>();
     private String validator = "";
@@ -169,11 +181,14 @@ public class Parameter implements java.io.Serializable {
     }
 
     public void update(Parameter parameter) {
-        setDataType(parameter.getDataType());
         setIdentifier(parameter.getIdentifier());
         setName(parameter.getName());
+        setDataType(parameter.getDataType());
+        setDataLength(parameter.getDataLength());
+        setNeeded(parameter.getNeeded());
         setRemark(parameter.getRemark());
         setValidator(parameter.getValidator());
+        setSort(parameter.getSort());
     }
 
     public List<Parameter> getParameterListOrdered() {
@@ -200,12 +215,10 @@ public class Parameter implements java.io.Serializable {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{\"id\":" + getId() + ",");
-        stringBuilder.append("\"identifier\":\""
-                + StringUtils.escapeInJ(getIdentifier()) + "\",");
-        stringBuilder.append("\"name\":\"" + StringUtils.escapeInJ(getName())
-                + "\",");
-        stringBuilder.append("\"remark\":\""
-                + StringUtils.escapeInJ(getRemark()) + "\",");
+        stringBuilder.append("\"sort\":\"" + StringUtils.escapeInJ(getSort()) + "\",");
+        stringBuilder.append("\"identifier\":\"" + StringUtils.escapeInJ(getIdentifier()) + "\",");
+        stringBuilder.append("\"name\":\"" + StringUtils.escapeInJ(getName()) + "\",");
+        stringBuilder.append("\"remark\":\"" + StringUtils.escapeInJ(getRemark()) + "\",");
         stringBuilder.append("\"parameterList\":");
         stringBuilder.append("[");
         Iterator<Parameter> iterator = getParameterListOrdered().iterator();
@@ -216,10 +229,10 @@ public class Parameter implements java.io.Serializable {
             }
         }
         stringBuilder.append("],");
-        stringBuilder.append("\"validator\":\""
-                + StringUtils.escapeInJ(getValidator()) + "\",");
-        stringBuilder.append("\"dataType\":\""
-                + StringUtils.escapeInJ(getDataType()) + "\"}");
+        stringBuilder.append("\"validator\":\"" + StringUtils.escapeInJ(getValidator()) + "\",");
+        stringBuilder.append("\"dataType\":\"" + StringUtils.escapeInJ(getDataType()) + "\",");
+        stringBuilder.append("\"dataLength\":\"" + StringUtils.escapeInJ(getDataLength()) + "\",");
+        stringBuilder.append("\"needed\":\"" + StringUtils.escapeInJ(getNeeded()) + "\"}");
         return stringBuilder.toString();
     }
 
@@ -251,5 +264,28 @@ public class Parameter implements java.io.Serializable {
         return this.getMockJsRules() != null;
     }
 
+	public String getDataLength() {
+		return dataLength;
+	}
 
+	public void setDataLength(String dataLength) {
+		this.dataLength = dataLength;
+	}
+
+	public String getNeeded() {
+		return needed;
+	}
+
+	public void setNeeded(String needed) {
+		this.needed = needed;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	
 }

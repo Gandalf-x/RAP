@@ -203,15 +203,13 @@ public class ProjectDaoImpl extends HibernateDaoSupport implements ProjectDao {
                     actionServer.update(action);
                     CacheUtils.removeCacheByActionId(action.getId());
                     for (Parameter parameter : action.getRequestParameterList()) {
-                        Parameter parameterServer = projectServer
-                                .findParameter(parameter.getId(), true);
+                        Parameter parameterServer = projectServer.findParameter(parameter.getId(), true);
                         if (parameterServer == null) {
                             addParameter(session, action, parameter, true);
                             continue;
                         }
                         parameterServer.update(parameter);
-                        for (Parameter childParameter : parameter
-                                .getParameterList()) {
+                        for (Parameter childParameter : parameter.getParameterList()) {
                             processParameterRecursively(session, projectServer,
                                     parameter, childParameter);
                         }

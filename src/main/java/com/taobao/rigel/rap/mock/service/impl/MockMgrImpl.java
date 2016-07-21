@@ -1,9 +1,35 @@
 package com.taobao.rigel.rap.mock.service.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import nl.flotsam.xeger.Xeger;
+
+import org.apache.logging.log4j.LogManager;
+
 import com.google.gson.Gson;
 import com.taobao.rigel.rap.common.config.Patterns;
 import com.taobao.rigel.rap.common.config.SystemSettings;
-import com.taobao.rigel.rap.common.utils.*;
+import com.taobao.rigel.rap.common.utils.ArrayUtils;
+import com.taobao.rigel.rap.common.utils.CacheUtils;
+import com.taobao.rigel.rap.common.utils.FileUtils;
+import com.taobao.rigel.rap.common.utils.JSRunner;
+import com.taobao.rigel.rap.common.utils.MockjsRunner;
+import com.taobao.rigel.rap.common.utils.NumberUtils;
+import com.taobao.rigel.rap.common.utils.StringUtils;
+import com.taobao.rigel.rap.common.utils.URLUtils;
 import com.taobao.rigel.rap.mock.bo.Rule;
 import com.taobao.rigel.rap.mock.dao.MockDao;
 import com.taobao.rigel.rap.mock.service.MockMgr;
@@ -11,16 +37,6 @@ import com.taobao.rigel.rap.project.bo.Action;
 import com.taobao.rigel.rap.project.bo.Parameter;
 import com.taobao.rigel.rap.project.dao.ProjectDao;
 import com.taobao.rigel.rap.project.service.ProjectMgr;
-import nl.flotsam.xeger.Xeger;
-import org.apache.logging.log4j.LogManager;
-import sun.misc.Cache;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MockMgrImpl implements MockMgr {
 
@@ -312,9 +328,6 @@ public class MockMgrImpl implements MockMgr {
         int actionId = 0;
         Action action;
 
-        if (pattern == null && options == null) {
-            actionId = projectId;
-        }
         _num = 1;
 
         if (actionId > 0) {  // from OPenAPI, invoked by params(id, null, null)
@@ -488,10 +501,8 @@ public class MockMgrImpl implements MockMgr {
 
                 if (docParamKey.contains("{") && docParamKey.contains("}")) {
                     hasSchema = true;
-                    String docParamKeyProcessed = docParamKey.substring(1,
-                            docParamKey.length() - 1);
-                    List<String> list1 = requestParams
-                            .get(docParamKeyProcessed);
+                    String docParamKeyProcessed = docParamKey.substring(1, docParamKey.length() - 1);
+                    List<String> list1 = requestParams.get(docParamKeyProcessed);
                     List<String> list2 = docActionParams.get(docParamKey);
                     if (list1 != null && list2 != null && list1.size() > 0
                             && list2.size() > 0

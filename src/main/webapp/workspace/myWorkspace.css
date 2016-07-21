@@ -256,7 +256,15 @@ body {
 }
 
 .div-a .head-name {
-    width: 180px
+    width: 120px
+}
+
+.div-a .head-sort {
+    width: 50px
+}
+
+.div-a .head-identifier {
+    width: 120px
 }
 
 .div-a .head-validator {
@@ -264,15 +272,19 @@ body {
 }
 
 .div-a .head-type {
-    width: 110px;
+    width: 100px;
+}
+
+.div-a .head-length {
+    width: 100px;
+}
+
+.div-a .head-needed {
+    width: 80px;
 }
 
 .div-a .head-remark {
-
-}
-
-.div-a .head-identifier {
-    width: 180px;
+	width: 
 }
 
 .div-a .head-expander {
@@ -282,6 +294,11 @@ body {
 .div-a .op {
     background-color: #E6E6E6;
     border-left: none;
+}
+
+.div-a .sort {
+    border-left: none;
+    text-align: center;
 }
 
 .div-a .identifier {
@@ -302,6 +319,16 @@ body {
 }
 
 .div-a .dataType {
+    text-align: center;
+    font-weight: bold;
+}
+
+.div-a .needed {
+    text-align: center;
+    font-weight: bold;
+}
+
+.div-a .dataLength {
     text-align: center;
     font-weight: bold;
 }
@@ -528,7 +555,7 @@ body {
     border: white 1px solid;
     border-collapse: collapse;
     margin: 12px 8px 8px 18px;
-    width: 100%;
+    width: 99%;
 }
 
 .div-add-p-link {
@@ -595,7 +622,16 @@ body {
 .select-dataType {
     background-color: #E6E6E6;
     border: none;
-    width: 100px;
+    width: 80px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.select-needed {
+    background-color: #E6E6E6;
+    border: none;
+    width: 65px;
     margin: 0;
     padding: 0;
     text-align: center;

@@ -18,7 +18,13 @@
             <column name="remark"/>
         </property>
         <property name="dataType">
-            <column name="data_Type"/>
+            <column name="data_type"/>
+        </property>
+        <property name="dataLength">
+            <column name="data_length"/>
+        </property>
+        <property name="needed">
+            <column name="needed"/>
         </property>
         <property name="mockData">
             <column name="mock_data"/>
